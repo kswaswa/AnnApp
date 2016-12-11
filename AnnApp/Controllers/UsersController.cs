@@ -29,6 +29,9 @@ namespace AnnApp.Controllers
             return View();
         }
 
+        /**
+         * Checks if user is professor role or not.
+         * */
         public Boolean isProfessorUser()
         {
             if (User.Identity.IsAuthenticated)

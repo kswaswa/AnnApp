@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using AnnApp.Models;
 using Microsoft.AspNet.Identity;
@@ -14,11 +13,13 @@ namespace AnnApp.Controllers
 {
     public class AnnsController : Controller
     {
+        // A reference to our database so we can access our tables and information.
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Anns
         public ActionResult Index()
         {
+            // We want to save this and pass to html every time this page loads.
             if (isProfessorUser())
             {
                 ViewBag.Name = "Professor";
@@ -31,8 +32,13 @@ namespace AnnApp.Controllers
             return View();
         }
 
+        /**
+         * Returns the total list of Anns for the User we are on.
+         * (none for null/no user)
+         * */
         private IEnumerable<Ann> GetMyAnns()
         {
+            // Get current user ID using the Identity framework
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault
                 (x => x.Id == currentUserId);
@@ -51,6 +57,9 @@ namespace AnnApp.Controllers
             }
         }
         
+        /**
+         * Simply sends the list of anns to the partial view _AnnTable.
+         * */
         public ActionResult BuildAnnTable()
         {
             if (isProfessorUser())
@@ -65,6 +74,10 @@ namespace AnnApp.Controllers
             return PartialView("_AnnTable", GetMyAnns());
         }
 
+        /**
+         * Returns the list of Anns in order of what is checked on the page
+         * to the partial view.
+         * */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SortAnnTable(string check)
@@ -72,17 +85,18 @@ namespace AnnApp.Controllers
             var myAnns = GetMyAnns();
             var myRet = myAnns;
 
-            if (check.ToString() == "Title")
+            // If title is checked, order by title, etc.
+            if (check == "Title")
             {
                 myRet = myAnns.OrderBy(x => x.Title);
             }
 
-            if (check.ToString() == "Content")
+            if (check == "Content")
             {
                 myRet = myAnns.OrderBy(x => x.Content);
             }
 
-            if (check.ToString() == "PostDate")
+            if (check == "PostDate")
             {
                 myRet = myAnns.OrderBy(x => x.PostDate);
             }
@@ -90,6 +104,10 @@ namespace AnnApp.Controllers
             return PartialView("_AnnTable", myRet);
         }
 
+        /**
+         * Returns list of Anns with string entered into filter title box
+         * to partial view.
+         * */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult FilterTitle(string title)
@@ -104,11 +122,16 @@ namespace AnnApp.Controllers
             }
 
             var myAnns = GetMyAnns();
+            // Only keep those titles that contain the string they entered.
             var myTitle = myAnns.Where(x => x.Title.Contains(title));
 
             return PartialView("_AnnTable", myTitle);
         }
 
+        /**
+         * Returns list of Anns with string entered into filter content box
+         * to partial view.
+         * */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult FilterContent(string content)
@@ -128,6 +151,10 @@ namespace AnnApp.Controllers
             return PartialView("_AnnTable", myContent);
         }
 
+        /**
+         * Returns list of Anns with string entered into filter post date box
+         * to partial view.
+         * */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult FilterPostDate(DateTime postDate)
@@ -147,23 +174,36 @@ namespace AnnApp.Controllers
             return PartialView("_AnnTable", myPostDate);
         }
 
+        /**
+         * Returns the comments for the ann you are on to the partial view
+         * that renders the comment table.
+         * */
         public ActionResult BuildCommentTable()
         {
+            // Gets ID from details function
             var myId = int.Parse(Session["ID"].ToString());
+
             var myAnns = GetMyAnns();
             var myAnn = GetMyAnn(myAnns, myId);
 
+            // Gets comments from database where their ann is the current ann
             var myC1 = db.Comments.Where(x => x.Ann.ID == myId);
 
             return PartialView("_CommentsTable", myC1);
         }
 
+        /**
+         * Gets all of the users and subtracts the vieweds' users
+         * who have viewed the current ann to return the list of who
+         * has not viewed ann to the partial view that renders this list.
+         * */
         public ActionResult BuildViewedAnnTable()
         {
             var myAnns = GetMyAnns();
             var myId = int.Parse(Session["ID"].ToString());
             var myAnn = GetMyAnn(myAnns, myId);
 
+            // Get vieweds for current ann
             var myV1 = db.Vieweds.Where(x => x.Ann.ID == myId);
 
             var currentUser = new ApplicationUser();
@@ -175,12 +215,14 @@ namespace AnnApp.Controllers
             }
 
             var nonViewers = new List<ApplicationUser>();
+            // Get all users in user database
             var allUsers = db.Users.ToList();
             foreach (var user in allUsers)
             {
                 // If user in all user is not in viewed list for this Ann, add to new list
                 if (myV1.Where(x => x.User.Id == user.Id).Count() < 1)
                 {
+                    // This subtracts users that have viewed ann from all user list
                     nonViewers.Add(user);
                 }
             }
@@ -188,6 +230,10 @@ namespace AnnApp.Controllers
             return PartialView("_ViewedAnn", nonViewers);
         }
 
+        /**
+         * Adds new comment to database and returns comments
+         * of current ann to partial view that renders comment list.
+         * */
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddComment(string comment, int id)
@@ -204,23 +250,27 @@ namespace AnnApp.Controllers
 
             try
             {
+                // Add comment to comment database
                 var myComment = new Comment();
                 myComment.comment = comment;
                 myComment.Ann = myAnn;
                 db.Comments.Add(myComment);
+                db.SaveChanges();
             }
             catch
             {
                 return HttpNotFound();
             }
 
-            db.SaveChanges();
-
+            // Get all comments for current ann
             var retComments = db.Comments.Where(m => m.Ann.ID == myId);
 
             return PartialView("_CommentsTable", retComments);
         }
 
+        /**
+         * Return the ann for the id given.
+         * */
         private Ann GetMyAnn(IEnumerable<Ann> anns, int id)
         {
             return db.Anns.Find(id);
@@ -274,6 +324,9 @@ namespace AnnApp.Controllers
             return View(ann);
         }
 
+        /**
+         * Checks if the current user role is professor or not (student)
+         * */
         public Boolean isProfessorUser()
         {
             if (User.Identity.IsAuthenticated)

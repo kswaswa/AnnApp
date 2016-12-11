@@ -10,6 +10,9 @@ namespace AnnApp.Controllers
             return View();
         }
 
+        /**
+         * Supposedly downloads a view as a word document (doesn't work).
+         * */
         [WordDocument]
         [HttpPost]
         [ValidateAntiForgeryToken]

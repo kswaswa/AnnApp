@@ -6,6 +6,8 @@ using System.Web;
 
 namespace AnnApp.Models
 {
+    // can store each comment in a database connected to 
+    // which ann it is under
     public class Comment
     {
         public int ID { get; set; }

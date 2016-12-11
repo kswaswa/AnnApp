@@ -5,6 +5,7 @@ using System.Web;
 
 namespace AnnApp.Models
 {
+    // can store who has viewed which ann in the database
     public class Viewed
     {
         public int ID { get; set; }

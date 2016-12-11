@@ -23,6 +23,7 @@ namespace AnnApp.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM}", ApplyFormatInEditMode = true)]
         public DateTime PostDate { get; set; }
 
+        // Which user has posted or seen the ann
         public virtual ApplicationUser User { get; set; }
 
         // Which users have clicked on "details" next to announcement.

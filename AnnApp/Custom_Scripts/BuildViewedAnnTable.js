@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿// render viewed list every time page loads
+$(document).ready(function () {
     $.ajax({
         url: "/Anns/BuildViewedAnnTable",
         success: function (result) {

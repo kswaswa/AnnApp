@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿// Render ann table every time page loads
+$(document).ready(function () {
     $.ajax({
         url: "/Anns/BuildAnnTable",
         success: function (result) {
@@ -7,6 +8,8 @@
     });
 });
 
+// When any of the radio buttons change, sort the ann table
+// and render it again
 $("input[name=sort]:radio").change(function () {
     var check = $("input[name=sort]:radio").val();
     $.ajax({
@@ -18,6 +21,8 @@ $("input[name=sort]:radio").change(function () {
     });
 });
 
+// Every time this input text box changes,
+// filter and re-render ann table
 $("#filterTitle").change(function () {
     var title = $("#filterTitle").val();
     $.ajax({

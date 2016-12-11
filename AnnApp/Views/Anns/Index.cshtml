@@ -4,6 +4,7 @@
     ViewBag.Title = "Index";
 }
 
+<!--Filter by x-->
 <div id="filterByBar">
     @Html.AntiForgeryToken()
     <p>@Html.Encode("Filter By: ")</p>
@@ -16,6 +17,7 @@
     <p></p>
 </div>
 
+<!--Order by x-->
 <div id="orderByBar">
     <p>@Html.Encode("Order By: ")</p>
     <form id="myform">
@@ -26,12 +28,15 @@
     </form>
 </div>
 
+<!--Announcements-->
 <p id="annTitle">@Html.Encode("Announcements:")</p>
 
 <div id="tableDiv"></div>
 
+<!--If prof, show:-->
 @if (ViewBag.Name == "Professor")
 {
+<!--Create Ann-->
 <p id="createAnnTitle">@Html.Encode("Create Announcement:")</p>
 
 <div id="annCreateForm">

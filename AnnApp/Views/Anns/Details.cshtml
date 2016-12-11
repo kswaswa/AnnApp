@@ -44,9 +44,10 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-
+<!--Comments-->
 <div id="commentDiv"></div>
 
+<!--Create comment-->
 <div id="commentTableCreate">
     @using (Ajax.BeginForm("AddComment", "Anns",
         new AjaxOptions
@@ -68,8 +69,10 @@
 <p>
     @if (ViewBag.Name == "Professor")
     {
+        <!--Who didn't view ann-->
         <div id="viewedAnnouncement"></div>
 
+        <!--Download not viewed list-->
         <h4>@Html.Encode("Download Viewed Document.")</h4>
         using (Ajax.BeginForm("DownloadViewedDocument", "WordController",
             new AjaxOptions
