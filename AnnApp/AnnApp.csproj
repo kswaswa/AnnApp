@@ -280,6 +280,23 @@
     <Compile Include="Word\WordDocumentAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ChosenAPI\chosen-sprite%402x.png" />
+    <Content Include="ChosenAPI\chosen-sprite.png" />
+    <Content Include="ChosenAPI\chosen.css" />
+    <Content Include="ChosenAPI\chosen.jquery.js" />
+    <Content Include="ChosenAPI\chosen.jquery.min.js" />
+    <Content Include="ChosenAPI\chosen.min.css" />
+    <Content Include="ChosenAPI\chosen.proto.js" />
+    <Content Include="ChosenAPI\chosen.proto.min.js" />
+    <Content Include="ChosenAPI\docsupport\chosen.png" />
+    <Content Include="ChosenAPI\docsupport\event.simulate.js" />
+    <Content Include="ChosenAPI\docsupport\oss-credit.png" />
+    <Content Include="ChosenAPI\docsupport\prism.css" />
+    <Content Include="ChosenAPI\docsupport\prism.js" />
+    <Content Include="ChosenAPI\docsupport\style.css" />
+    <Content Include="ChosenAPI\index.html" />
+    <Content Include="ChosenAPI\index.proto.html" />
+    <Content Include="ChosenAPI\options.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom.css" />
@@ -295,6 +312,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ChosenAPI\bower.json" />
+    <Content Include="ChosenAPI\package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
