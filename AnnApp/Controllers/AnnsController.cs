@@ -49,11 +49,17 @@ namespace AnnApp.Controllers
                 return db.Anns.ToList().Where(x => x.User == newUser);
             }
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult BuildAnnTable()
         {
+            if (isProfessorUser())
+            {
+                ViewBag.Name = "Professor";
+            }
+            else
+            {
+                ViewBag.Name = "Student";
+            }
             return PartialView("_AnnTable", GetMyAnns());
         }
 
@@ -82,6 +88,14 @@ namespace AnnApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FilterTitle(string title)
         {
+            if (isProfessorUser())
+            {
+                ViewBag.Name = "Professor";
+            }
+            else
+            {
+                ViewBag.Name = "Student";
+            }
             var myAnns = GetMyAnns();
             var myTitle = myAnns.Where(x => x.Title.Contains(title));
             return PartialView("_AnnTable", myTitle);
@@ -91,6 +105,14 @@ namespace AnnApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FilterContent(string content)
         {
+            if (isProfessorUser())
+            {
+                ViewBag.Name = "Professor";
+            }
+            else
+            {
+                ViewBag.Name = "Student";
+            }
             var myAnns = GetMyAnns();
             var myContent = myAnns.Where(x => x.Content.Contains(content));
             return PartialView("_AnnTable", myContent);
@@ -100,6 +122,14 @@ namespace AnnApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FilterPostDate(DateTime postDate)
         {
+            if (isProfessorUser())
+            {
+                ViewBag.Name = "Professor";
+            }
+            else
+            {
+                ViewBag.Name = "Student";
+            }
             var myAnns = GetMyAnns();
             var myPostDate = myAnns.Where(x => x.PostDate.Equals(postDate));
             return PartialView("_AnnTable", myPostDate);
@@ -181,7 +211,6 @@ namespace AnnApp.Controllers
         private Ann GetMyAnn(IEnumerable<Ann> anns, int id)
         {
             return db.Anns.Find(id);
-            //return anns.FirstOrDefault(x => x.ID == GlobalID);
         }
 
         // GET: Anns/Details/5
