@@ -24,29 +24,29 @@ input[type="datetime"] {
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-#orderByBar p,
+#annTitle,
+#createAnnTitle,
 #filterByBar p,
 #filterByBar text,
-#annTitle,
-#createAnnTitle {
-  font-weight: bold;
-  font-family: inherit;
-  font-size: 100%;
+#orderByBar p {
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 100%;
 }
 
 #myform input[type="radio"] {
-  font-family: inherit;
-  font-size: 100%;
+    font-family: inherit;
+    font-size: 100%;
 }
 
 input[type="radio"]:focus {
-  outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
 }
 
 input[type="radio"] {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 #filterByBar,

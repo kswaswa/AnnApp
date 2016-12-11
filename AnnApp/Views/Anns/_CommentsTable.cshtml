@@ -1,9 +1,7 @@
 ﻿@model IEnumerable<AnnApp.Models.Comment>
 
 <div class="commentsTableRegister">
-        <h3>
-            Comments
-        </h3>
+        <h3>@Html.Encode("Comments")</h3>
 
     <ul>
             @try
@@ -15,7 +13,7 @@
             }
             catch
             {
-                <li>No comments yet.</li>
+                <li>@Html.Encode("No comments yet.")</li>
             }
     </ul>
 

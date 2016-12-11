@@ -10,6 +10,7 @@ using AnnApp.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections;
+using System.Web.UI;
 
 namespace AnnApp.Controllers
 {
@@ -327,27 +328,26 @@ namespace AnnApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AJAXCreate([Bind(Include = "ID,Title,Content,PostDate")] Ann ann)
         {
-            if (ModelState.IsValid)
-            {
-                string currentUserId = User.Identity.GetUserId();
-                ApplicationUser currentUser = db.Users.FirstOrDefault
-                    (x => x.Id == currentUserId);
-                ann.User = currentUser;
-
-                if (isProfessorUser())
+                if (ModelState.IsValid)
                 {
-                    ViewBag.Name = "Professor";
-                }
-                else
-                {
-                    ViewBag.Name = "Student";
+                    string currentUserId = User.Identity.GetUserId();
+                    ApplicationUser currentUser = db.Users.FirstOrDefault
+                        (x => x.Id == currentUserId);
+                    ann.User = currentUser;
+
+                    if (isProfessorUser())
+                    {
+                        ViewBag.Name = "Professor";
+                    }
+                    else
+                    {
+                        ViewBag.Name = "Student";
+                    }
+
+                    db.Anns.Add(ann);
+                    db.SaveChanges();
                 }
 
-                //ann.Comments = null;
-                db.Anns.Add(ann);
-                db.SaveChanges();
-            }
-            
             return PartialView("_AnnTable", GetMyAnns());
         }
 

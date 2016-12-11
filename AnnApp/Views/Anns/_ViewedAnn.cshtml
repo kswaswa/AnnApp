@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<AnnApp.Models.ApplicationUser>
 
-<h4>Have NOT Viewed Announcement: </h4>
+<h4>@Html.Encode("Have NOT Viewed Announcement: ")</h4>
 <ul>
     @try
     {
@@ -11,7 +11,7 @@
     }
     catch
     {
-        <li> Everyone has viewed this announcement.</li>
+        <li>@Html.Encode("Everyone has viewed this announcement.")</li>
     }
 </ul>
 

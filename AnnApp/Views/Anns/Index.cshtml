@@ -4,56 +4,34 @@
     ViewBag.Title = "Index";
 }
 
-<!--
-<div id="sortSearchBar">
-    @*
-    @using (Ajax.BeginForm("BuildAnnTableSortSearch", "Anns",
-                new AjaxOptions
-                {
-                    InsertionMode = InsertionMode.Replace,
-                    HttpMethod = "POST",
-                    UpdateTargetId = "tableDiv"
-                }))
-        *@
-    {
-        <p>Filter By: </p>
-        <input type="text" name="Title" />
-        <input type="text" name="Content" />
-        <input type="datetime" name="PostDate" />
-        <input type="submit" value="Filter" />
-    }
-</div>
--->
-
-
 <div id="filterByBar">
     @Html.AntiForgeryToken()
-    <p>Filter By: </p>
-    <text>Title </text>
+    <p>@Html.Encode("Filter By: ")</p>
+    <text>@Html.Encode("Title ")</text>
     <input type="text" id="filterTitle" name="filter" />
-    <text>Content </text>
+    <text>@Html.Encode("Content ")</text>
     <input type="text" id="filterContent" name="filter" />
-    <text>Post Date</text>
+    <text>@Html.Encode("Content")Post Date</text>
     <input type="datetime" id="filterPostDate" name="filter" />
     <p></p>
 </div>
 
 <div id="orderByBar">
-    <p>Order By: </p>
+    <p>@Html.Encode("Order By: ")</p>
     <form id="myform">
         @Html.AntiForgeryToken()
-            <input type="radio" name="sort" value="Title">Title<br>
-            <input type="radio" name="sort" value="Content">Content<br>
-            <input type="radio" name="sort" value="PostDate">Post Date
+            <input type="radio" name="sort" value="Title">@Html.Encode("Title")<br>
+            <input type="radio" name="sort" value="Content">@Html.Encode("Content")<br>
+            <input type="radio" name="sort" value="PostDate">@Html.Encode("Post Date")
     </form>
 </div>
 
-<p id="annTitle">Announcements:</p>
+<p id="annTitle">@Html.Encode("Announcements:")</p>
 <div id="tableDiv"></div>
 
 @if (ViewBag.Name == "Professor")
 {
-<p id="createAnnTitle">Create Announcement:</p>
+<p id="createAnnTitle">@Html.Encode("Create Announcement:")</p>
 <div id="annCreateForm">
     @using (Ajax.BeginForm("AJAXCreate", "Anns",
                         new AjaxOptions

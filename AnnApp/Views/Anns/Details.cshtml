@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.Encode("Details")</h2>
 
 <div>
     <hr />
@@ -57,11 +57,7 @@
     {
         @Html.AntiForgeryToken()
         <input type="text" name="comment" />
-        <!--<input type="hidden" value="@*@ViewBag.ID*@" id="hdnID" />
-        <input type="hidden" value="@*@ViewBag.Comments*@" id="hdnComments" />-->
         @Html.HiddenFor(m => m.ID, new { id = Model.ID })
-        @*@Html.HiddenFor(m => m.Comments, new { comments = Model.Comments })*@
-
         <input type="submit" value="Add Comment" />
     }
     
@@ -72,7 +68,7 @@
     {
         <div id="viewedAnnouncement"></div>
 
-        <h4>Download Viewed Document.</h4>
+        <h4>@Html.Encode("Download Viewed Document.")</h4>
         using (Ajax.BeginForm("DownloadViewedDocument", "WordController",
             new AjaxOptions
             {
