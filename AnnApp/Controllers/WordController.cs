@@ -15,6 +15,8 @@ namespace AnnApp.Controllers
         }
 
         [WordDocument]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DownloadViewedDocument()
         {
             ViewBag.AnnTitle = Session["title"];

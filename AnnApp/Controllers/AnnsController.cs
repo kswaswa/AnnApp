@@ -50,11 +50,15 @@ namespace AnnApp.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult BuildAnnTable()
         {
             return PartialView("_AnnTable", GetMyAnns());
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SortAnnTable(string check)
         {
             var myAnns = GetMyAnns();
@@ -76,29 +80,6 @@ namespace AnnApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult BuildAnnTableSortSearch(string title, string content, DateTime postDate)
-        {
-            var myAnns = GetMyAnns();
-            var myTitle = myAnns.Where(x => x.Title.Contains(title));
-            var myCont = myTitle.Where(x => x.Content.Contains(content));
-            var myRet = myCont.Where(x => x.PostDate.Equals(postDate));
-            /*
-            if (myform == "Title")
-            {
-                myRet = myRet.OrderBy(x => x.Title);
-            }
-            if (myform == "Content")
-            {
-                myRet = myRet.OrderBy(x => x.Content);
-            }
-            if (myform == "checkPostDate")
-            {
-                myRet = myRet.OrderBy(x => x.PostDate);
-            }
-            */
-            return PartialView("_AnnTable", myRet);
-        }
-
         public ActionResult FilterTitle(string title)
         {
             var myAnns = GetMyAnns();
@@ -106,6 +87,8 @@ namespace AnnApp.Controllers
             return PartialView("_AnnTable", myTitle);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult FilterContent(string content)
         {
             var myAnns = GetMyAnns();
@@ -113,6 +96,8 @@ namespace AnnApp.Controllers
             return PartialView("_AnnTable", myContent);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult FilterPostDate(DateTime postDate)
         {
             var myAnns = GetMyAnns();
@@ -160,7 +145,8 @@ namespace AnnApp.Controllers
             return PartialView("_ViewedAnn", nonViewers);
         }
 
-        //, Comment comments
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddComment(string comment, int id)
         {
             var anns = GetMyAnns();

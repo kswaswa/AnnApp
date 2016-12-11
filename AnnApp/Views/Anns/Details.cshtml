@@ -55,6 +55,7 @@
         }
         ))
     {
+        @Html.AntiForgeryToken()
         <input type="text" name="comment" />
         <!--<input type="hidden" value="@*@ViewBag.ID*@" id="hdnID" />
         <input type="hidden" value="@*@ViewBag.Comments*@" id="hdnComments" />-->
@@ -79,6 +80,7 @@
             }
             ))
         {
+            @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.Title, new { title = Model.Title })
             @Html.HiddenFor(m => m.ViewedAnn, new { viewed = Model.ViewedAnn })
             <input type="submit" value="Download" />
@@ -86,9 +88,9 @@
     }
 </p>
 
-        @section Scripts {
-            <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-            <script src="~/Custom_Scripts/BuildCommentsTable.js"></script>
-            <script src="~/Custom_Scripts/BuildViewedAnnTable.js"></script>
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/BuildCommentsTable.js"></script>
+    <script src="~/Custom_Scripts/BuildViewedAnnTable.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

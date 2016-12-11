@@ -27,6 +27,7 @@
 
 
 <div id="filterByBar">
+    @Html.AntiForgeryToken()
     <p>Filter By: </p>
     <text>Title </text>
     <input type="text" id="filterTitle" name="filter" />
@@ -40,6 +41,7 @@
 <div id="orderByBar">
     <p>Order By: </p>
     <form id="myform">
+        @Html.AntiForgeryToken()
             <input type="radio" name="sort" value="Title">Title<br>
             <input type="radio" name="sort" value="Content">Content<br>
             <input type="radio" name="sort" value="PostDate">Post Date
