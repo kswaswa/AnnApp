@@ -8,7 +8,6 @@ namespace AnnApp.Models
 {
     public class Comment
     {
-        //matches that of ann?
         public int ID { get; set; }
 
         [Display(Name = "Comment")]

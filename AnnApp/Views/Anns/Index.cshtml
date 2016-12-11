@@ -27,11 +27,13 @@
 </div>
 
 <p id="annTitle">@Html.Encode("Announcements:")</p>
+
 <div id="tableDiv"></div>
 
 @if (ViewBag.Name == "Professor")
 {
 <p id="createAnnTitle">@Html.Encode("Create Announcement:")</p>
+
 <div id="annCreateForm">
     @using (Ajax.BeginForm("AJAXCreate", "Anns",
                         new AjaxOptions

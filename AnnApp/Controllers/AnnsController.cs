@@ -9,8 +9,6 @@ using System.Web.Mvc;
 using AnnApp.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Collections;
-using System.Web.UI;
 
 namespace AnnApp.Controllers
 {
@@ -29,6 +27,7 @@ namespace AnnApp.Controllers
             {
                 ViewBag.Name = "Student";
             }
+
             return View();
         }
 
@@ -37,8 +36,9 @@ namespace AnnApp.Controllers
             string currentUserId = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault
                 (x => x.Id == currentUserId);
+
             ApplicationUser newUser = new ApplicationUser();
-            //== currentUser
+
             if (currentUser != null)
             {
                 // only doing (if not null) so every user w account can see all announcements
@@ -61,6 +61,7 @@ namespace AnnApp.Controllers
             {
                 ViewBag.Name = "Student";
             }
+
             return PartialView("_AnnTable", GetMyAnns());
         }
 
@@ -70,18 +71,22 @@ namespace AnnApp.Controllers
         {
             var myAnns = GetMyAnns();
             var myRet = myAnns;
+
             if (check.ToString() == "Title")
             {
                 myRet = myAnns.OrderBy(x => x.Title);
             }
+
             if (check.ToString() == "Content")
             {
                 myRet = myAnns.OrderBy(x => x.Content);
             }
+
             if (check.ToString() == "PostDate")
             {
                 myRet = myAnns.OrderBy(x => x.PostDate);
             }
+
             return PartialView("_AnnTable", myRet);
         }
 
@@ -97,8 +102,10 @@ namespace AnnApp.Controllers
             {
                 ViewBag.Name = "Student";
             }
+
             var myAnns = GetMyAnns();
             var myTitle = myAnns.Where(x => x.Title.Contains(title));
+
             return PartialView("_AnnTable", myTitle);
         }
 
@@ -114,8 +121,10 @@ namespace AnnApp.Controllers
             {
                 ViewBag.Name = "Student";
             }
+
             var myAnns = GetMyAnns();
             var myContent = myAnns.Where(x => x.Content.Contains(content));
+
             return PartialView("_AnnTable", myContent);
         }
 
@@ -131,8 +140,10 @@ namespace AnnApp.Controllers
             {
                 ViewBag.Name = "Student";
             }
+
             var myAnns = GetMyAnns();
             var myPostDate = myAnns.Where(x => x.PostDate.Equals(postDate));
+
             return PartialView("_AnnTable", myPostDate);
         }
 
@@ -141,7 +152,9 @@ namespace AnnApp.Controllers
             var myId = int.Parse(Session["ID"].ToString());
             var myAnns = GetMyAnns();
             var myAnn = GetMyAnn(myAnns, myId);
+
             var myC1 = db.Comments.Where(x => x.Ann.ID == myId);
+
             return PartialView("_CommentsTable", myC1);
         }
 
@@ -171,8 +184,7 @@ namespace AnnApp.Controllers
                     nonViewers.Add(user);
                 }
             }
-
-            //var myV2 = myV1.Where(x => x.User.UserName != currentUser.UserName);
+            
             return PartialView("_ViewedAnn", nonViewers);
         }
 
@@ -221,6 +233,7 @@ namespace AnnApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Ann ann = db.Anns.Find(id);
             if (ann == null)
             {
@@ -249,6 +262,7 @@ namespace AnnApp.Controllers
             Viewed myViewed = new Viewed();
             myViewed.Ann = ann;
             myViewed.User = currentUser;
+
             // Only adds the username once.
             var viewedsId = db.Vieweds.Where(x => x.Ann.ID == ann.ID);
             if (viewedsId == null)
@@ -268,6 +282,7 @@ namespace AnnApp.Controllers
                 ApplicationDbContext context = new ApplicationDbContext();
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 var s = UserManager.GetRoles(user.GetUserId());
+
                 try
                 {
                     if (s[0] == "Professor")
@@ -280,6 +295,7 @@ namespace AnnApp.Controllers
                     return false;
                 }
             }
+
             return false;
         }
 
@@ -311,8 +327,7 @@ namespace AnnApp.Controllers
                 {
                     ViewBag.Name = "Student";
                 }
-
-                //ann.Comments = null;
+                
                 db.Anns.Add(ann);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -358,11 +373,14 @@ namespace AnnApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Ann ann = db.Anns.Find(id);
+
             if (ann == null)
             {
                 return HttpNotFound();
             }
+
             return View(ann);
         }
 
@@ -379,6 +397,7 @@ namespace AnnApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(ann);
         }
 
@@ -389,11 +408,14 @@ namespace AnnApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Ann ann = db.Anns.Find(id);
+
             if (ann == null)
             {
                 return HttpNotFound();
             }
+
             return View(ann);
         }
 

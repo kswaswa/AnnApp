@@ -35,6 +35,7 @@
 
     </dl>
 </div>
+
 <p>
     @if (ViewBag.Name == "Professor")
     {
@@ -45,6 +46,7 @@
 
 
 <div id="commentDiv"></div>
+
 <div id="commentTableCreate">
     @using (Ajax.BeginForm("AddComment", "Anns",
         new AjaxOptions
@@ -60,7 +62,7 @@
         @Html.HiddenFor(m => m.ID, new { id = Model.ID })
         <input type="submit" value="Add Comment" />
     }
-    
+
 </div>
 
 <p>
