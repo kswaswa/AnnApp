@@ -396,7 +396,8 @@ namespace AnnApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AJAXCreate([Bind(Include = "ID,Title,Content,PostDate")] Ann ann)
         {
-                if (ModelState.IsValid)
+                //if (ModelState.IsValid)
+                try
                 {
                     string currentUserId = User.Identity.GetUserId();
                     ApplicationUser currentUser = db.Users.FirstOrDefault
@@ -415,6 +416,10 @@ namespace AnnApp.Controllers
                     db.Anns.Add(ann);
                     db.SaveChanges();
                 }
+                catch
+            {
+                return PartialView("_AnnTableFail", GetMyAnns());
+            }
 
             return PartialView("_AnnTable", GetMyAnns());
         }

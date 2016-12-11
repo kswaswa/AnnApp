@@ -373,6 +373,7 @@
     <Content Include="Views\Shared\_LayoutWord.cshtml" />
     <Content Include="Views\Word\View.cshtml" />
     <Content Include="Views\Anns\_ViewedAnn.cshtml" />
+    <Content Include="Views\Anns\_AnnTableFail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,7 +30,13 @@ $("#filterTitle").change(function () {
         data: { "title": title },
         success: function (result) {
             $("#tableDiv").html(result);
+        },
+        error: function () {
+            alert("Cannot contain html. Try again.");
         }
+    })
+    .fail(function () {
+        alert("Cannot contain html. Try again.");
     });
 });
 $("#filterContent").change(function () {
