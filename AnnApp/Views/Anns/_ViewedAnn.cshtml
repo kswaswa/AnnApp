@@ -1,0 +1,17 @@
+﻿@model IEnumerable<AnnApp.Models.ApplicationUser>
+
+<h4>Have NOT Viewed Announcement: </h4>
+<ul>
+    @try
+    {
+            foreach (var item in Model)
+            {
+                <li>@item.UserName</li>
+            }
+    }
+    catch
+    {
+        <li> Everyone has viewed this announcement.</li>
+    }
+</ul>
+

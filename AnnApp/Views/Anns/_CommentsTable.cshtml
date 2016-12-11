@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AnnApp.Models.Comment>
+
+<div class="commentsTableRegister">
+        <h3>
+            Comments
+        </h3>
+
+    <ul>
+            @*@Html.HiddenFor(m => m.ID, new { id = Model.ID })*@
+            @try
+            {
+                foreach (var item in Model)
+                {
+                    <li>@item.comment.ToString()</li>
+                }
+            }
+            catch
+            {
+                <li>No comments yet.</li>
+            }
+            <!--
+            <td>
+                @*
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    *@
+            </td>
+                -->
+    </ul>
+
+</div>

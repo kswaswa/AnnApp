@@ -1,0 +1,94 @@
+﻿@model AnnApp.Models.Ann
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (ViewBag.Name == "Professor")
+    {
+        Html.ActionLink("Edit", "Edit", new { id = Model.ID });
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+<div id="commentDiv"></div>
+<div id="commentTableCreate">
+    @using (Ajax.BeginForm("AddComment", "Anns",
+        new AjaxOptions
+        {
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "POST",
+            UpdateTargetId = "commentDiv"
+        }
+        ))
+    {
+        <input type="text" name="comment" />
+        <!--<input type="hidden" value="@*@ViewBag.ID*@" id="hdnID" />
+        <input type="hidden" value="@*@ViewBag.Comments*@" id="hdnComments" />-->
+        @Html.HiddenFor(m => m.ID, new { id = Model.ID })
+        @*@Html.HiddenFor(m => m.Comments, new { comments = Model.Comments })*@
+
+        <input type="submit" value="Add Comment" />
+    }
+    
+</div>
+
+<p>
+    @if (ViewBag.Name == "Professor")
+    {
+        <div id="viewedAnnouncement"></div>
+
+        <h4>Download Viewed Document.</h4>
+        using (Ajax.BeginForm("DownloadViewedDocument", "WordController",
+            new AjaxOptions
+            {
+                HttpMethod = "POST"
+            }
+            ))
+        {
+            @Html.HiddenFor(m => m.Title, new { title = Model.Title })
+            @Html.HiddenFor(m => m.ViewedAnn, new { viewed = Model.ViewedAnn })
+            <input type="submit" value="Download" />
+        }
+    }
+</p>
+
+        @section Scripts {
+            <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+            <script src="~/Custom_Scripts/BuildCommentsTable.js"></script>
+            <script src="~/Custom_Scripts/BuildViewedAnnTable.js"></script>
+            @Scripts.Render("~/bundles/jqueryval")
+        }

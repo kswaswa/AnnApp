@@ -1,0 +1,63 @@
+﻿body {
+    background: #bdb8d0;
+}
+
+#filterTitle #filterContent #filterPostDate,
+input[type="text"],
+input[type="datetime"] {
+    -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+  -webkit-appearance: textfield;
+  display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+#orderByBar p,
+#filterByBar p,
+#filterByBar text,
+#annTitle,
+#createAnnTitle {
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 100%;
+}
+
+#myform input[type="radio"] {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+input[type="radio"]:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+input[type="radio"] {
+  box-sizing: border-box;
+}
+
+#filterByBar,
+#orderByBar {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#annTitle,
+#createAnnTitle,
+#filterByBar text {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

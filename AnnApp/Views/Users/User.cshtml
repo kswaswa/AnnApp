@@ -1,0 +1,21 @@
+﻿@* help - http://social.technet.microsoft.com/wiki/contents/articles/33229.asp-net-mvc-5-security-and-creating-user-role.aspx*@
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (ViewBag.displayMenu == "Yes")
+{
+    <h1>Welcome Professor. You can create/delete/edit announcements.</h1>
+    <!--
+    <h2>
+        <li>@*@Html.ActionLink("FunctionName", "ControllerName", "Role")*@</li>
+    </h2>    
+    -->
+}
+else
+{
+    <h2>Welcome <strong>@ViewBag.Name</strong>.</h2>
+}
+
