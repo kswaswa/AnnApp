@@ -25,22 +25,28 @@ $("input[name=sort]:radio").change(function () {
 // filter and re-render ann table
 $("#filterTitle").change(function () {
     var title = $("#filterTitle").val();
+
+    // If has html/ trying to XSS, set title to empty
+    var res = title.match("^[a-zA-Z0-9_\s]+");
+    if (res == null)
+    {
+        title = "";
+    }
+
     $.ajax({
         url: "/Anns/FilterTitle",
         data: { "title": title },
         success: function (result) {
             $("#tableDiv").html(result);
-        },
-        error: function () {
-            alert("Cannot contain html. Try again.");
         }
     })
-    .fail(function () {
-        alert("Cannot contain html. Try again.");
-    });
 });
 $("#filterContent").change(function () {
     var content = $("#filterContent").val();
+    var res = content.match("^[a-zA-Z0-9_\s]+");
+    if (res == null) {
+        content = "";
+    }
     $.ajax({
         url: "/Anns/FilterContent",
         data: { "content": content },
@@ -51,6 +57,10 @@ $("#filterContent").change(function () {
 });
 $("#filterPostDate").change(function () {
     var postDate = $("#filterPostDate").val();
+    var res = postDate.match("^[a-zA-Z0-9_\s]+");
+    if (res == null) {
+        postDate = "";
+    }
     $.ajax({
         url: "/Anns/FilterPostDate",
         data: { "postDate": postDate },

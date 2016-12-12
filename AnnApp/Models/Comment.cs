@@ -12,6 +12,7 @@ namespace AnnApp.Models
     {
         public int ID { get; set; }
 
+        [RegularExpression("^[a-zA-Z0-9_\\s]+")]
         [Display(Name = "Comment")]
         public string comment { get; set; }
 

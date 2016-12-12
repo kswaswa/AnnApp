@@ -78,8 +78,6 @@ namespace AnnApp.Controllers
          * Returns the list of Anns in order of what is checked on the page
          * to the partial view.
          * */
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult SortAnnTable(string check)
         {
             var myAnns = GetMyAnns();
@@ -108,8 +106,6 @@ namespace AnnApp.Controllers
          * Returns list of Anns with string entered into filter title box
          * to partial view.
          * */
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult FilterTitle(string title)
         {
             if (isProfessorUser())
@@ -132,8 +128,6 @@ namespace AnnApp.Controllers
          * Returns list of Anns with string entered into filter content box
          * to partial view.
          * */
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult FilterContent(string content)
         {
             if (isProfessorUser())
@@ -155,8 +149,6 @@ namespace AnnApp.Controllers
          * Returns list of Anns with string entered into filter post date box
          * to partial view.
          * */
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult FilterPostDate(DateTime postDate)
         {
             if (isProfessorUser())

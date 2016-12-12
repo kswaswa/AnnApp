@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AnnApp.Models
@@ -12,10 +9,12 @@ namespace AnnApp.Models
         public int ID { get; set; }
 
         [Required]
+        [RegularExpression("^[a-zA-Z0-9_\\s]+")]
         [StringLength(30, MinimumLength = 3)] //Client side validation
         public string Title { get; set; }
 
         [Required]
+        [RegularExpression("^[a-zA-Z0-9_\\s]+")]
         [StringLength(1000, MinimumLength = 5)]
         public string Content { get; set; }
 

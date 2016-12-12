@@ -68,7 +68,7 @@ namespace AnnApp.Models
         public bool RememberMe { get; set; }
     }
 
-    // view-specific model I created/edited
+    // view-specific model I edited
     //help - http://social.technet.microsoft.com/wiki/contents/articles/33229.asp-net-mvc-5-security-and-creating-user-role.aspx
     public class RegisterViewModel
     {
