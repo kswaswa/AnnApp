@@ -71,21 +71,6 @@
     {
         <!--Who didn't view ann-->
         <div id="viewedAnnouncement"></div>
-
-        <!--Download not viewed list-->
-        <h4>@Html.Encode("Download Viewed Document.")</h4>
-        using (Ajax.BeginForm("DownloadViewedDocument", "WordController",
-            new AjaxOptions
-            {
-                HttpMethod = "POST"
-            }
-            ))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.Title, new { title = Model.Title })
-            @Html.HiddenFor(m => m.ViewedAnn, new { viewed = Model.ViewedAnn })
-            <input type="submit" value="Download" />
-        }
     }
 </p>
 

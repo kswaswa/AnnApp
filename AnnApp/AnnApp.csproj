@@ -200,7 +200,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -375,7 +374,6 @@
     <Content Include="Views\Anns\_CommentsTable.cshtml" />
     <Content Include="Views\Users\User.cshtml" />
     <Content Include="Views\Shared\_LayoutWord.cshtml" />
-    <Content Include="Views\Word\View.cshtml" />
     <Content Include="Views\Anns\_ViewedAnn.cshtml" />
     <Content Include="Views\Anns\_AnnTableFail.cshtml" />
   </ItemGroup>
